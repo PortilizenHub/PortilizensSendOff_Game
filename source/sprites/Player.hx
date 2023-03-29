@@ -11,22 +11,23 @@ using StringTools;
 
 class Player extends FlxSprite
 {
-	var holdTimer:Float = 0;
-	var hFrame:Int = 0;
+	public var speed:Float = 0;
+	public var state:String = 'idle';
 
-	public var state:String = '';
+	public var animList:Array<String> = ['idle', 'walk', 'damage'];
 
 	public function new(version:String = '')
 	{
 		super(version);
 
 		antialiasing = false;
-
 		loadGraphic(Files.returnImageFile(Files.stcs + version), true, 16, 16);
 		setGraphicSize(Std.int(width * 6));
 
 		// should be in every iteration like this
 		animation.add('idle', [0], 24);
+		animation.add('walk', [0, 1, 0, 2], 12);
+		animation.add('damage', [3, 4], 12);
 
 		// add extra animations
 		switch (version)
@@ -38,13 +39,24 @@ class Player extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
+		switch (state)
+		{
+			case 'idle':
+				animation.play('idle');
+			case 'walk':
+				animation.play('walk');
+			default:
+				playAnimation(state);
+
+				if (animation.finished)
+					state = 'idle';
+		}
 		super.update(elapsed);
 	}
 
-	public function playAnimation(anim:String = 'idle', ?ht:Float = 4)
+	public function playAnimation(anim:String = 'damage')
 	{
-		holdTimer = ht;
-
+		state = '';
 		animation.play(anim);
 	}
 }

@@ -7,14 +7,13 @@ import sprites.Player;
 class PlayState extends FlxState
 {
 	var stcs:Player;
-	var stcsState:String = 'idle';
-	var stcsHT:Float = 4;
 
 	override public function create()
 	{
 		stcs = new Player('');
 		stcs.screenCenter(XY);
-		stcs.playAnimation('idle');
+		stcs.state = 'idle';
+		stcs.speed = 4;
 		add(stcs);
 
 		super.create();
@@ -24,22 +23,32 @@ class PlayState extends FlxState
 	{
 		input();
 
-		if (stcsHT > 0)
-			stcsHT -= 0.1;
-
 		super.update(elapsed);
 	}
 
 	public function input()
 	{
-		if (FlxG.keys.justPressed.SPACE)
+		stcs.state = 'idle';
+
+		// states
+		if (FlxG.keys.pressed.LEFT || FlxG.keys.pressed.RIGHT || FlxG.keys.pressed.UP || FlxG.keys.pressed.DOWN)
+			stcs.state = 'walk';
+
+		// actual stuff
+		if (FlxG.keys.pressed.LEFT)
 		{
-			stcs.playAnimation('dodge');
-			stcsHT = 4;
-			trace('DODGE!');
+			stcs.x -= stcs.speed;
+			stcs.flipX = true;
+		}
+		else if (FlxG.keys.pressed.RIGHT)
+		{
+			stcs.x += stcs.speed;
+			stcs.flipX = false;
 		}
 
-		if (stcsHT < 1)
-			stcs.playAnimation('idle');
+		if (FlxG.keys.pressed.UP)
+			stcs.y -= stcs.speed;
+		else if (FlxG.keys.pressed.DOWN)
+			stcs.y += stcs.speed;
 	}
 }
