@@ -78,6 +78,9 @@ class MenuState extends FlxState
 			// trace(menuBtn.alpha + ' - ' + menuBtn.ID);
 		});
 
+		if (FlxG.keys.justReleased.ENTER)
+			FlxG.switchState(new PlayState());
+
 		super.update(elapsed);
 	}
 
