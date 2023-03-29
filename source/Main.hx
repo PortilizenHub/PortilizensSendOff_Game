@@ -11,7 +11,7 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-		addChild(new FlxGame(0, 0, SaveState));
+		addChild(new FlxGame(0, 0, MenuState));
 
 		fps = new FPS(2, 2);
 		addChild(fps);
