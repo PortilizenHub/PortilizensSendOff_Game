@@ -24,7 +24,7 @@ class MenuState extends FlxState
 		for (i in 0...menuOpt.length)
 		{
 			var menuBtn:FlxSprite = new FlxSprite(40, (80 * (i + 1)) + 30);
-			menuBtn.loadGraphic(Files.returnImageFile(Files.mainMenuAssets), true, 128, 64);
+			menuBtn.loadGraphic(Files.returnImageFile(Files.returnImageFile('main_menu_assets')), true, 128, 64);
 			menuBtn.animation.add('play', [0]);
 			menuBtn.animation.add('options', [1]);
 			menuBtn.animation.play(menuOpt[i]);
