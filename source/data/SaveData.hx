@@ -12,6 +12,7 @@ class SaveData
 {
 	public static var fpsCounter:Bool = true;
 	public static var lowEndConsole:Bool = false;
+	public static var money:Int = 0;
 
 	public static function saveAll(path:String = 'portilizen', name:String = '')
 	{
@@ -19,12 +20,14 @@ class SaveData
 
 		FlxG.save.data.fpsCounter = fpsCounter;
 		FlxG.save.data.LED = lowEndConsole;
+		FlxG.save.data.money = money;
 
 		if (FileSystem.exists('assets/data/saves'))
 		{
 			var json = {
 				fps: fpsCounter,
-				lowEndDevice: lowEndConsole
+				lowEndDevice: lowEndConsole,
+				money: money
 			};
 
 			var data:String = Json.stringify(json);

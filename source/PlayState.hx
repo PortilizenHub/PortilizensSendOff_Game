@@ -1,12 +1,16 @@
 package;
 
+import data.SaveData;
 import flixel.FlxG;
+import flixel.FlxSprite;
 import flixel.FlxState;
+import sprites.Files;
 import sprites.Player;
 
 class PlayState extends FlxState
 {
 	var stcs:Player;
+	var ghost:FlxSprite;
 
 	override public function create()
 	{
@@ -15,6 +19,9 @@ class PlayState extends FlxState
 		stcs.state = 'idle';
 		stcs.speed = 4;
 		add(stcs);
+
+		ghost = new FlxSprite(0, 0, Files.returnImageFile('ghost'));
+		add(ghost);
 
 		super.create();
 	}

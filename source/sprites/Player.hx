@@ -29,6 +29,7 @@ class Player extends FlxSprite
 		animation.add('idle', [0], 24);
 		animation.add('walk', [0, 1, 0, 2], 12);
 		animation.add('damage', [3, 4], 12);
+		animation.add('attack', [5, 6], 12);
 
 		// add extra animations
 		switch (version)
