@@ -1,6 +1,5 @@
 package;
 
-import effects.ChromaticAbberation;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -10,7 +9,6 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import openfl.filters.ShaderFilter;
 import sprites.Files;
-import sprites.MenuItem;
 
 class MenuState extends FlxState
 {
@@ -18,16 +16,9 @@ class MenuState extends FlxState
 	public var menuOpt:Array<String> = ['play', 'options'];
 
 	var curSel:Int = 0;
-	var caShader:ChromaticAbberation;
-	var wave:FlxWaveEffect;
 
 	override public function create()
 	{
-		caShader = new ChromaticAbberation(0);
-		add(caShader);
-		caShader.amount = 0.8;
-		var filter2:ShaderFilter = new ShaderFilter(caShader.shader);
-
 		menuBtnGrp = new FlxTypedGroup<FlxSprite>();
 
 		for (i in 0...menuOpt.length)
@@ -43,10 +34,6 @@ class MenuState extends FlxState
 		}
 
 		add(menuBtnGrp);
-
-		wave = new FlxWaveEffect(ALL, 10, 0.7, 6, 10, VERTICAL, 0);
-		// wont work, augh
-		// add(wave);
 
 		super.create();
 	}
