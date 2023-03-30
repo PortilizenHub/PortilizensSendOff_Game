@@ -11,17 +11,20 @@ using StringTools;
 class SaveData
 {
 	public static var fpsCounter:Bool = true;
+	public static var lowEndConsole:Bool = false;
 
 	public static function saveAll(path:String = 'portilizen', name:String = '')
 	{
 		var _file:FileReference;
 
 		FlxG.save.data.fpsCounter = fpsCounter;
+		FlxG.save.data.LED = lowEndConsole;
 
 		if (FileSystem.exists('assets/data/saves'))
 		{
 			var json = {
-				fps: fpsCounter
+				fps: fpsCounter,
+				lowEndDevice: lowEndConsole
 			};
 
 			var data:String = Json.stringify(json);

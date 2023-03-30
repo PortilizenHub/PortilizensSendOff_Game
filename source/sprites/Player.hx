@@ -1,5 +1,6 @@
 package sprites;
 
+import data.SaveData;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
@@ -35,6 +36,9 @@ class Player extends FlxSprite
 			default:
 				trace('stcs' + version + ' has no extra animations');
 		}
+
+		if (SaveData.lowEndConsole)
+			visible = false;
 	}
 
 	override function update(elapsed:Float)
