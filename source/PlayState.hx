@@ -14,6 +14,9 @@ class PlayState extends FlxState
 
 	override public function create()
 	{
+		trace(FlxG.save);
+		data.Save.save();
+
 		super.create();
 	}
 

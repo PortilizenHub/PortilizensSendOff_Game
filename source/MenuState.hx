@@ -17,14 +17,18 @@ class MenuState extends FlxState
 
 	var curSel:Int = 0;
 
+	var app = new openfl.display.Application();
+
 	override public function create()
 	{
+		trace(app.meta["build"]);
+
 		menuBtnGrp = new FlxTypedGroup<FlxSprite>();
 
 		for (i in 0...menuOpt.length)
 		{
 			var menuBtn:FlxSprite = new FlxSprite(40, (80 * (i + 1)) + 30);
-			menuBtn.loadGraphic(Files.returnImageFile(Files.returnImageFile('main_menu_assets')), true, 128, 64);
+			menuBtn.loadGraphic(Files.returnImageFile('mainMenu/main_menu_assets'), true, 128, 64);
 			menuBtn.animation.add('play', [0]);
 			menuBtn.animation.add('options', [1]);
 			menuBtn.animation.play(menuOpt[i]);
@@ -34,8 +38,6 @@ class MenuState extends FlxState
 		}
 
 		add(menuBtnGrp);
-
-		FlxG.save.bind("SFS", 'portilizen');
 
 		super.create();
 	}
@@ -73,6 +75,7 @@ class MenuState extends FlxState
 				FlxG.switchState(new LoadingState());
 			else
 			{
+				data.Save.save();
 				trace(FlxG.save);
 				FlxG.switchState(new PlayState());
 			}

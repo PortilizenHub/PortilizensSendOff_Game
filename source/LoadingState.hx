@@ -49,6 +49,14 @@ class LoadingState extends FlxState
 				txt.color = FlxColor.YELLOW;
 		});
 
+		if (FlxG.keys.justReleased.ENTER)
+		{
+			if (curSel == 0)
+				FlxG.save.erase();
+
+			FlxG.switchState(new PlayState());
+		}
+
 		super.update(elapsed);
 	}
 }
