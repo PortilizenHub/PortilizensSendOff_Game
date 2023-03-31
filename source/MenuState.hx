@@ -35,6 +35,8 @@ class MenuState extends FlxState
 
 		add(menuBtnGrp);
 
+		FlxG.save.bind("SFS", 'portilizen');
+
 		super.create();
 	}
 
@@ -66,7 +68,15 @@ class MenuState extends FlxState
 		});
 
 		if (FlxG.keys.justReleased.ENTER)
-			FlxG.switchState(new PlayState());
+		{
+			if (!FlxG.save.isEmpty())
+				FlxG.switchState(new LoadingState());
+			else
+			{
+				trace(FlxG.save);
+				FlxG.switchState(new PlayState());
+			}
+		}
 
 		super.update(elapsed);
 	}
